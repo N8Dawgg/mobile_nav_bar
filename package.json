@@ -1,0 +1,19 @@
+{
+  "name": "mobile_nav_bar",
+  "version": "1.0.0",
+  "description": "A simple mobile nav bar.",
+  "main": "mobile_nav_bar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/N8Dawgg/mobile_nav_bar.git"
+  },
+  "author": "Nat Wheeler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/N8Dawgg/mobile_nav_bar/issues"
+  },
+  "homepage": "https://github.com/N8Dawgg/mobile_nav_bar#readme"
+}
