@@ -1,6 +1,4 @@
 
-
-
 const initializeMobileNavBar = (svgButtonList, maxOpenWidth = 500, primaryColor = '#2596be', secondaryColor = '#FFFFFF') => {
     let container = document.createElement('div');
     container.style.position = 'sticky';
@@ -19,6 +17,19 @@ const initializeMobileNavBar = (svgButtonList, maxOpenWidth = 500, primaryColor 
     backgroundBar.style.transitionDuration = '1s';
     container.append(backgroundBar);
 
+    let buttonCenteringDiv = document.createElement('div');
+    buttonCenteringDiv.style.display = 'flex';
+    buttonCenteringDiv.style.width = 'min(98%,'+maxOpenWidth.toString()+'px)';
+    buttonCenteringDiv.style.justifyContent = 'space-evenly';
+    container.append(buttonCenteringDiv);
+
+    let crossButtonDiv = document.createElement('div');
+    crossButtonDiv.style.width = '64px';
+    crossButtonDiv.style.height = '64px';
+    crossButtonDiv.style.zIndex = '3';
+    // crossButtonDiv.style.display = 'flex';
+    crossButtonDiv.style.flexShrink = '1';
+
     let crossSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
     crossSVG.setAttribute('viewbox','0 0 64 64');
     // crossSVG.setAttribute('preserveAspectRatio','xMidYMid meet')
@@ -27,21 +38,28 @@ const initializeMobileNavBar = (svgButtonList, maxOpenWidth = 500, primaryColor 
     crossSVG.style.fill = secondaryColor;
     crossSVG.style.zIndex = '3';
     crossSVG.style.transitionDuration = '1s';
+    crossButtonDiv.append(crossSVG);
     
     let crossPath = document.createElementNS('http://www.w3.org/2000/svg','path');
     crossPath.setAttribute('d','M 28.8 16 h 6.4 v 12.8 h 12.8 v 6.4 h -12.8 v 12.8 h -6.4 v -12.8 h -12.8 v -6.4 h 12.8 z');
 
-    let flexPercentage = 100.0 / (1.0 + svgButtonList.length);
-    let flexPixel = maxOpenWidth / (1.0 + svgButtonList.length);
-    let flexString = 'min(' + flexPercentage.toString() + '%,' + flexPixel.toString() + 'px)';
-
     svgButtonList.forEach((button, index) => {
         if (index == svgButtonList.length * 0.5) {
-            container.append(crossSVG);
-            // crossSVG.style.width = flexString;
+            // buttonCenteringDiv.append(crossSVG);
+            buttonCenteringDiv.append(crossButtonDiv);
+
         }
-        container.append(button);
-        // button.style.width = flexString;
+        let buttonDiv = document.createElement('div');
+        buttonDiv.style.width = '64px';
+        buttonDiv.style.height = '64px';
+        buttonDiv.style.zIndex = '3';
+        // buttonDiv.style.display = 'flex';
+        buttonDiv.style.flexShrink = '1';
+        buttonDiv.append(button);
+        buttonCenteringDiv.append(buttonDiv)
+        
+        // buttonCenteringDiv.append(button);
+        
     })
 
     crossSVG.append(crossPath);
@@ -54,7 +72,7 @@ const initializeMobileNavBar = (svgButtonList, maxOpenWidth = 500, primaryColor 
     function toggleNavBarOpen() {
         open = !open;
         if (open) {
-            backgroundBar.style.width = 'min(90%,'+maxOpenWidth.toString()+'px)';
+            backgroundBar.style.width = 'min(98%,'+maxOpenWidth.toString()+'px)';
             crossSVG.style.rotate = '405deg';
         } else {
             backgroundBar.style.width = '64px';
@@ -67,6 +85,8 @@ const initializeMobileNavBar = (svgButtonList, maxOpenWidth = 500, primaryColor 
     return container;
 }
 
+
+/* TEST SCRIPT:
 function createTestSVG() {
     let testSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
     testSVG.setAttribute('viewbox','0 0 64 64');
@@ -95,3 +115,7 @@ document.body.append(initializeMobileNavBar(
         createTestSVG()
     ]
 ));
+*/
+
+
+export {initializeMobileNavBar};
